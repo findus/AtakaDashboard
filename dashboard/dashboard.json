@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_ATAKA-POSTGRES",
-      "label": "ataka-postgres",
+      "name": "DS_GRAFANA-POSTGRESQL-DATASOURCE",
+      "label": "grafana-postgresql-datasource",
       "description": "",
       "type": "datasource",
       "pluginId": "grafana-postgresql-datasource",
@@ -86,7 +86,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "${DS_ATAKA-POSTGRES}"
+        "uid": "${DS_GRAFANA-POSTGRESQL-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -167,13 +167,13 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "${DS_ATAKA-POSTGRES}"
+            "uid": "${DS_GRAFANA-POSTGRESQL-DATASOURCE}"
           },
           "editorMode": "code",
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT concat(exploit_histories.service, ' (',left(exploits.docker_name, -17), ')'), COALESCE(COUNT(flags.id), 0) as \" \" , date_trunc('minute',executions.timestamp) \nFROM executions\nleft join flags on flags.execution_id = executions.id \ninner join jobs on jobs.id = executions.job_id\ninner join exploits on jobs.exploit_id = exploits.id\ninner join exploit_histories on exploit_histories.id = exploits.exploit_history_id\nGROUP BY concat(exploit_histories.service, ' (',left(exploits.docker_name, -17), ')'), date_trunc('minute',executions.timestamp) \nORDER BY date_trunc('minute',executions.timestamp)\n",
+          "rawSql": "SELECT concat(exploit_histories.service, ' (',left(exploits.docker_name, -17), ')'), COALESCE(COUNT(flags.id), 0) as \" \" , date_trunc('minute',executions.timestamp) \nFROM executions\nleft join flags on flags.execution_id = executions.id \ninner join jobs on jobs.id = executions.job_id\ninner join exploits on jobs.exploit_id = exploits.id\ninner join exploit_histories on exploit_histories.id = exploits.exploit_history_id\nwhere flags.status = 'OK'\nGROUP BY concat(exploit_histories.service, ' (',left(exploits.docker_name, -17), ')'), date_trunc('minute',executions.timestamp) \nORDER BY date_trunc('minute',executions.timestamp)\n",
           "refId": "A",
           "sql": {
             "columns": [
@@ -217,7 +217,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "${DS_ATAKA-POSTGRES}"
+        "uid": "${DS_GRAFANA-POSTGRESQL-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -276,7 +276,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "${DS_ATAKA-POSTGRES}"
+            "uid": "${DS_GRAFANA-POSTGRESQL-DATASOURCE}"
           },
           "editorMode": "code",
           "format": "table",
@@ -315,7 +315,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "${DS_ATAKA-POSTGRES}"
+        "uid": "${DS_GRAFANA-POSTGRESQL-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -372,13 +372,13 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "${DS_ATAKA-POSTGRES}"
+            "uid": "${DS_GRAFANA-POSTGRESQL-DATASOURCE}"
           },
           "editorMode": "code",
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT COALESCE(COUNT(flags.id), 0) as \" \" , date_trunc('minute',executions.timestamp) \nFROM executions\nleft join flags on flags.execution_id = executions.id \ninner join jobs on jobs.id = executions.job_id\ninner join exploits on jobs.exploit_id = exploits.id\nWHERE date_trunc('minute',executions.timestamp) < date_trunc('minute',now())\nGROUP BY date_trunc('minute',executions.timestamp) \nORDER BY date_trunc('minute',executions.timestamp)",
+          "rawSql": "SELECT COALESCE(COUNT(flags.id), 0) as \" \" , date_trunc('minute',executions.timestamp) \nFROM executions\nleft join flags on flags.execution_id = executions.id \ninner join jobs on jobs.id = executions.job_id\ninner join exploits on jobs.exploit_id = exploits.id\nWHERE date_trunc('minute',executions.timestamp) < date_trunc('minute',now())\nAND flags.status = 'OK'\nGROUP BY date_trunc('minute',executions.timestamp) \nORDER BY date_trunc('minute',executions.timestamp)",
           "refId": "A",
           "sql": {
             "columns": [
@@ -411,7 +411,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "${DS_ATAKA-POSTGRES}"
+        "uid": "${DS_GRAFANA-POSTGRESQL-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -459,7 +459,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "${DS_ATAKA-POSTGRES}"
+            "uid": "${DS_GRAFANA-POSTGRESQL-DATASOURCE}"
           },
           "editorMode": "code",
           "format": "table",
@@ -491,7 +491,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "${DS_ATAKA-POSTGRES}"
+        "uid": "${DS_GRAFANA-POSTGRESQL-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -572,13 +572,13 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "${DS_ATAKA-POSTGRES}"
+            "uid": "${DS_GRAFANA-POSTGRESQL-DATASOURCE}"
           },
           "editorMode": "code",
           "format": "table",
           "hide": false,
           "rawQuery": true,
-          "rawSql": "SELECT COALESCE(COUNT(flags.id), 0) as \" \" , date_trunc('minute',executions.timestamp) \nFROM executions\nleft join flags on flags.execution_id = executions.id \ninner join jobs on jobs.id = executions.job_id\ninner join exploits on jobs.exploit_id = exploits.id\nGROUP BY date_trunc('minute',executions.timestamp) \nORDER BY date_trunc('minute',executions.timestamp)",
+          "rawSql": "SELECT COALESCE(COUNT(flags.id), 0) as \" \" , date_trunc('minute',executions.timestamp) \nFROM executions\nleft join flags on flags.execution_id = executions.id \ninner join jobs on jobs.id = executions.job_id\ninner join exploits on jobs.exploit_id = exploits.id\nwhere flags.status = 'OK'\nGROUP BY date_trunc('minute',executions.timestamp) \nORDER BY date_trunc('minute',executions.timestamp)",
           "refId": "A",
           "sql": {
             "columns": [
@@ -611,7 +611,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "${DS_ATAKA-POSTGRES}"
+        "uid": "${DS_GRAFANA-POSTGRESQL-DATASOURCE}"
       },
       "gridPos": {
         "h": 9,
@@ -635,7 +635,7 @@
     {
       "datasource": {
         "type": "grafana-postgresql-datasource",
-        "uid": "${DS_ATAKA-POSTGRES}"
+        "uid": "${DS_GRAFANA-POSTGRESQL-DATASOURCE}"
       },
       "fieldConfig": {
         "defaults": {
@@ -696,7 +696,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "${DS_ATAKA-POSTGRES}"
+            "uid": "${DS_GRAFANA-POSTGRESQL-DATASOURCE}"
           },
           "editorMode": "code",
           "format": "table",
@@ -726,7 +726,7 @@
         {
           "datasource": {
             "type": "grafana-postgresql-datasource",
-            "uid": "${DS_ATAKA-POSTGRES}"
+            "uid": "${DS_GRAFANA-POSTGRESQL-DATASOURCE}"
           },
           "editorMode": "builder",
           "format": "table",
@@ -747,13 +747,13 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Ataka",
   "uid": "Ly9ShNXSk",
-  "version": 35,
+  "version": 4,
   "weekStart": ""
 }
