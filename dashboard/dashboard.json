@@ -119,7 +119,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -754,6 +754,6 @@
   "timezone": "",
   "title": "Ataka",
   "uid": "Ly9ShNXSk",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }
